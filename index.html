@@ -1,9 +1,900 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Claude Test</title>
+<!-- saved from url=(0068)file:///D:/Users/TomerChen/Downloads/claude_code_exam_russian_2.html -->
+<html lang="ru" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — Экзамен (продвинутый уровень)</title>
+<script src="./Claude Code — Экзамен (продвинутый уровень)_files/email.min.js.download"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap');
+:root{
+  --bg:#07090d;--s1:#0c0f18;--s2:#10141f;--s3:#151a28;
+  --b:#1a2035;--blue:#5b9cf6;--cyan:#38c9d4;--green:#3ecf8e;
+  --orange:#f97316;--gold:#f5c842;--purple:#a78bfa;--red:#f87171;
+  --text:#dde5f8;--muted:#5a6680;--r:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:0 0 4rem;}
+
+/* HEADER */
+.header{background:var(--s1);border-bottom:1px solid var(--b);padding:2rem 2rem 1.5rem;text-align:center;position:relative;}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--orange));}
+.kicker{display:inline-flex;gap:.5rem;align-items:center;font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--orange);border:1px solid var(--orange);padding:.25rem .8rem;border-radius:100px;margin-bottom:.9rem;letter-spacing:.1em;}
+h1{font-size:1.85rem;font-weight:900;background:linear-gradient(130deg,#fff,#8899cc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.4rem;line-height:1.25;}
+.sub{color:var(--muted);font-size:.88rem;margin-bottom:1.2rem;}
+.meta{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:1rem;}
+.meta-i{font-size:.82rem;color:var(--muted);}
+.meta-i strong{color:var(--text);}
+
+/* CANDIDATE FORM */
+.candidate-form{background:var(--s2);border:1px solid var(--blue);border-radius:var(--r);padding:1.5rem;margin:1.5rem auto;max-width:860px;}
+.candidate-form h3{font-size:.9rem;font-weight:700;color:var(--blue);margin-bottom:1rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.field label{display:block;font-size:.75rem;color:var(--muted);margin-bottom:.35rem;font-weight:500;}
+.field input{width:100%;background:var(--s1);border:1px solid var(--b);border-radius:7px;padding:.7rem .9rem;color:var(--text);font-family:'Inter',sans-serif;font-size:.87rem;outline:none;transition:border-color .2s;}
+.field input:focus{border-color:var(--blue);}
+.field input.required-empty{border-color:var(--red);}
+
+/* TIMER */
+#timer-bar{position:sticky;top:0;z-index:100;background:rgba(7,9,13,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--b);padding:.55rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+#timer-display{font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:700;color:var(--green);}
+#timer-display.warn{color:var(--gold);}
+#timer-display.crit{color:var(--red);animation:blink 1s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+.timer-label{font-size:.72rem;color:var(--muted);}
+.progress-wrap{flex:1;max-width:300px;height:4px;background:var(--s3);border-radius:2px;margin:0 1.5rem;}
+#progress-bar{height:100%;background:var(--green);border-radius:2px;transition:width .5s,background .5s;}
+
+/* WRAP */
+.wrap{max-width:860px;margin:0 auto;padding:0 1.5rem;}
+
+/* SECTION */
+.sec{margin:2.5rem 0 .5rem;}
+.sec-hdr{display:flex;align-items:center;gap:.9rem;margin-bottom:1.2rem;}
+.sec-tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700;padding:.28rem .8rem;border-radius:6px;white-space:nowrap;}
+.t-blue{color:var(--blue);background:rgba(91,156,246,.1);border:1px solid rgba(91,156,246,.2);}
+.t-orange{color:var(--orange);background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);}
+.t-green{color:var(--green);background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.2);}
+.t-purple{color:var(--purple);background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);}
+.t-cyan{color:var(--cyan);background:rgba(56,201,212,.1);border:1px solid rgba(56,201,212,.2);}
+.t-gold{color:var(--gold);background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.2);}
+.t-red{color:var(--red);background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);}
+.sec-name{font-size:1rem;font-weight:700;}
+.sec-line{flex:1;height:1px;background:var(--b);}
+
+/* CARD */
+.card{background:var(--s1);border:1px solid var(--b);border-radius:var(--r);padding:1.7rem;margin-bottom:1rem;transition:border-color .2s;}
+.q-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--orange);font-weight:700;}
+.q-pts{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--gold);border:1px solid rgba(245,200,66,.25);padding:.18rem .5rem;border-radius:4px;}
+.q-text{font-size:.93rem;font-weight:600;line-height:1.65;margin-bottom:.9rem;}
+.q-note{font-size:.78rem;color:var(--muted);font-style:italic;margin-bottom:.8rem;}
+
+/* CODE */
+.code{font-family:'JetBrains Mono',monospace;font-size:.77rem;background:#040507;border:1px solid #111825;border-radius:8px;padding:.9rem 1.1rem;margin:.6rem 0;direction:ltr;text-align:left;overflow-x:auto;line-height:1.75;color:#9ab0e8;}
+.kw{color:#c792ea;} .st{color:#c3e88d;} .cm{color:#3d4d6e;} .fn{color:#82aaff;} .hl{color:#ffe082;} .num{color:#f78c6c;}
+
+/* OPTIONS */
+.opts{display:flex;flex-direction:column;gap:.45rem;}
+.opt{display:flex;align-items:flex-start;gap:.75rem;padding:.7rem .95rem;background:var(--s2);border:1px solid var(--b);border-radius:7px;cursor:pointer;font-size:.87rem;line-height:1.55;transition:all .15s;}
+.opt:hover{border-color:var(--blue);background:rgba(91,156,246,.04);}
+.opt input{margin-top:3px;accent-color:var(--blue);flex-shrink:0;}
+.opt.multi input{accent-color:var(--cyan);}
+
+/* TEXTAREA */
+textarea{width:100%;background:var(--s2);border:1px solid var(--b);border-radius:7px;padding:.85rem 1rem;color:var(--text);font-family:'Inter',sans-serif;font-size:.87rem;resize:vertical;min-height:120px;outline:none;transition:border-color .2s;}
+textarea:focus{border-color:var(--blue);}
+
+/* SCENARIO */
+.scenario{background:rgba(91,156,246,.04);border:1px solid rgba(91,156,246,.15);border-radius:8px;padding:1rem 1.2rem;margin-bottom:.9rem;font-size:.84rem;line-height:1.75;color:#b8c8f0;}
+.scenario strong{color:var(--blue);}
+
+/* SUBMIT */
+.submit-area{text-align:center;padding:2.5rem 2rem;background:var(--s1);border-top:1px solid var(--b);margin-top:3rem;}
+.btn-submit{background:var(--orange);color:#fff;border:none;padding:.9rem 3.5rem;font-size:1rem;font-weight:700;font-family:'Inter',sans-serif;border-radius:8px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.6rem;}
+.btn-submit:hover{background:#dd6510;transform:translateY(-1px);}
+.btn-submit:disabled{background:var(--muted);cursor:not-allowed;transform:none;}
+
+/* OVERLAY */
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;}
+#overlay.show{display:flex;}
+.modal{background:var(--s1);border:1px solid var(--b);border-radius:var(--r);padding:2.5rem;text-align:center;max-width:480px;width:90%;}
+.modal-icon{font-size:3rem;margin-bottom:1rem;}
+.modal h2{font-size:1.3rem;font-weight:800;margin-bottom:.8rem;}
+.modal p{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem;}
+.modal .score{font-size:2.5rem;font-weight:900;margin:.5rem 0;}
+.modal-btn{background:var(--blue);color:#fff;border:none;padding:.75rem 2rem;font-size:.9rem;font-weight:700;font-family:'Inter',sans-serif;border-radius:7px;cursor:pointer;margin:.3rem;}
+.modal-btn.sec{background:var(--s3);border:1px solid var(--b);}
+
+/* RESULTS inline */
+#inline-results{display:none;background:var(--s1);border-top:1px solid var(--b);padding:2rem;margin-top:1rem;}
+.ak-row{display:flex;align-items:flex-start;gap:.65rem;padding:.6rem .8rem;border-radius:6px;font-size:.84rem;margin-bottom:.4rem;}
+.ak-row.ok{background:rgba(62,207,142,.07);border:1px solid rgba(62,207,142,.15);}
+.ak-row.no{background:rgba(248,113,113,.07);border:1px solid rgba(248,113,113,.15);}
+.open-note{background:rgba(167,139,250,.06);border:1px solid rgba(167,139,250,.18);border-radius:8px;padding:1.2rem;margin-top:1.5rem;font-size:.85rem;line-height:1.8;}
+.open-note h3{color:var(--purple);margin-bottom:.7rem;}
+
+code{font-family:'JetBrains Mono',monospace;font-size:.82em;color:var(--cyan);background:rgba(56,201,212,.08);padding:.1rem .35rem;border-radius:4px;}
+
+/* SENDING STATE */
+.sending-spinner{display:inline-block;width:1rem;height:1rem;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
 </head>
 <body>
-  <h1>It works 🚀</h1>
-</body>
-</html>
+
+<div class="header">
+  <div class="kicker">🔬 ТЕХНИЧЕСКИЙ ЭКЗАМЕН · LINUX DEVELOPERS</div>
+  <h1>Claude Code — Продвинутый экзамен</h1>
+  <p class="sub">Официальный курс Anthropic «Claude Code in Action» + продвинутые темы · Linux</p>
+  <div class="meta">
+    <div class="meta-i">⏱ Время: <strong>60 минут</strong></div>
+    <div class="meta-i">❓ Вопросов: <strong>30</strong></div>
+    <div class="meta-i">📊 Баллов: <strong>250</strong></div>
+    <div class="meta-i">✅ Проходной балл: <strong>75% (188 б.)</strong></div>
+    <div class="meta-i">💻 Окружение: <strong>Linux</strong></div>
+  </div>
+</div>
+
+<!-- CANDIDATE INFO -->
+<div class="wrap">
+  <div class="candidate-form">
+    <h3>👤 Данные кандидата (заполните перед началом)</h3>
+    <div class="form-row">
+      <div class="field"><label>Имя и фамилия *</label><input type="text" id="cand-name" placeholder="Иван Иванов" required=""></div>
+      <div class="field"><label>Email *</label><input type="email" id="cand-email" placeholder="ivan@company.com" required=""></div>
+    </div>
+    <div class="form-row" style="margin-top:.8rem">
+      <div class="field"><label>Должность</label><input type="text" id="cand-role" placeholder="Backend Developer"></div>
+      <div class="field"><label>Опыт работы</label><input type="text" id="cand-exp" placeholder="3 года"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMER BAR -->
+<div id="timer-bar">
+  <div>
+    <div class="timer-label">Оставшееся время</div>
+    <div id="timer-display" class="">59:22</div>
+  </div>
+  <div class="progress-wrap"><div id="progress-bar" style="width: 98.9444%; background: var(--green);"></div></div>
+  <div class="timer-label" id="answered-count">Отвечено: 0 / 30</div>
+</div>
+
+<div class="wrap">
+
+<!-- ===== SECTION A ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-blue">Часть A</span>
+    <span class="sec-name">Архитектура и Coding Assistant Architecture</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 1 / 30</div><div class="q-pts">6 б.</div></div>
+    <div class="q-text">Как официальный курс Anthropic определяет «coding assistant»? Чем он отличается от обычного LLM?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q1" value="a"> LLM, ограниченный только написанием кода</label>
+      <label class="opt"><input type="radio" name="q1" value="b"> AI, интегрированный с tool use для чтения, записи и изменения файлов и запуска команд — выходит за рамки обычной генерации текста</label>
+      <label class="opt"><input type="radio" name="q1" value="c"> Умная IDE с продвинутым автодополнением</label>
+      <label class="opt"><input type="radio" name="q1" value="d"> LLM, обученный исключительно на коде</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 2 / 30</div><div class="q-pts">6 б.</div></div>
+    <div class="q-text">Какая команда правильно устанавливает Claude Code на Linux как нативный бинарный файл (не через npm)?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q2" value="a"><code>sudo apt install claude-code</code></label>
+      <label class="opt"><input type="radio" name="q2" value="b"><code>curl -fsSL https://claude.ai/install.sh | bash</code></label>
+      <label class="opt"><input type="radio" name="q2" value="c"><code>pip install anthropic-claude-code</code></label>
+      <label class="opt"><input type="radio" name="q2" value="d"><code>wget https://anthropic.com/claude-code &amp;&amp; chmod +x claude-code</code></label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 3 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Claude Code общается с model APIs <strong>напрямую</strong>, без бэкенд-сервера. Как именно он читает файлы?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q3" value="a"> Использует filesystem API Node.js напрямую</label>
+      <label class="opt"><input type="radio" name="q3" value="b"> Отправляет весь код как контекстное окно в LLM</label>
+      <label class="opt"><input type="radio" name="q3" value="c"> Claude получает инструменты (Read, Edit, Write, Bash, Grep, Glob) как function calls — CLI реализует их выполнение</label>
+      <label class="opt"><input type="radio" name="q3" value="d"> Claude Code использует RAG по всей кодовой базе</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 4 / 30</div><div class="q-pts">6 б.</div></div>
+    <div class="q-text">Какие 3 источника контекста читает Claude Code при старте сессии? (выберите все правильные)</div>
+    <div class="q-note">Может быть несколько правильных ответов</div>
+    <div class="opts">
+      <label class="opt multi"><input type="checkbox" name="q4" value="a"> <code>~/.claude/CLAUDE.md</code> (user-level memory)</label>
+      <label class="opt multi"><input type="checkbox" name="q4" value="b"> <code>CLAUDE.md</code> в директории проекта</label>
+      <label class="opt multi"><input type="checkbox" name="q4" value="c"> <code>~/.gitconfig</code></label>
+      <label class="opt multi"><input type="checkbox" name="q4" value="d"> <code>CLAUDE.md</code> в родительских директориях (иерархия)</label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION B ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-orange">Часть B</span>
+    <span class="sec-name">Управление контекстом и Custom Commands</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 5 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Какие основные slash-команды используются для управления контекстом в Claude Code?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q5" value="a"> <code>/reset</code> — очистка, <code>/save</code> — сохранение, <code>/load</code> — загрузка</label>
+      <label class="opt"><input type="radio" name="q5" value="b"> <code>/clear</code> — полная очистка диалога; <code>/compact</code> — сжимает в summary и продолжает; <code>/context</code> — показывает, что сейчас загружено</label>
+      <label class="opt"><input type="radio" name="q5" value="c"> <code>/flush</code> — очистка, <code>/compress</code> — сжатие</label>
+      <label class="opt"><input type="radio" name="q5" value="d"> Контекст управляется только автоматически</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 6 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Как создать custom slash-команду <code>/review</code> в Claude Code?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q6" value="a"> Настроить в <code>~/.claude/settings.json</code> под ключом <code>"commands"</code></label>
+      <label class="opt"><input type="radio" name="q6" value="b"> Создать файл <code>.claude/commands/review.md</code> с содержимым промпта — Claude запустит его как slash-команду</label>
+      <label class="opt"><input type="radio" name="q6" value="c"> Написать bash-скрипт с именем <code>claude-review.sh</code> в PATH</label>
+      <label class="opt"><input type="radio" name="q6" value="d"> Custom-команды не поддерживаются — только встроенные</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 7 / 30</div><div class="q-pts">6 б.</div></div>
+    <div class="q-text">Что делает <code>$ARGUMENTS</code> внутри файла custom-команды?</div>
+    <div class="code"><span class="cm"># .claude/commands/deploy.md</span>
+Deploy the application to the <span class="hl">$ARGUMENTS</span> environment.
+Run all tests first. If tests fail, abort deployment.</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q7" value="a"> Переменная bash, заменяемая перед запуском</label>
+      <label class="opt"><input type="radio" name="q7" value="b"> Плейсхолдер, заменяемый аргументами, переданными после имени команды (например: <code>/deploy production</code>)</label>
+      <label class="opt"><input type="radio" name="q7" value="c"> Ссылка на файл arguments.json</label>
+      <label class="opt"><input type="radio" name="q7" value="d"> Переменная окружения, которую нужно задать вручную</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 8 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Что такое thinking/planning mode в Claude Code и когда его использовать?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q8" value="a"> Режим, печатающий chain-of-thought перед каждым ответом — всегда активен</label>
+      <label class="opt"><input type="radio" name="q8" value="b"> Extended thinking — позволяет Claude «думать» перед выполнением; рекомендуется для сложных архитектурных задач, больших рефакторингов и трудного дебаггинга</label>
+      <label class="opt"><input type="radio" name="q8" value="c"> Режим только для составления плана без выполнения</label>
+      <label class="opt"><input type="radio" name="q8" value="d"> Функция только Opus — недоступна в Sonnet</label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION C: HOOKS ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-green">Часть C</span>
+    <span class="sec-name">Hooks — детерминированный механизм расширения</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 9 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">В чём принципиальное отличие hook от инструкции в CLAUDE.md?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q9" value="a"> Никакой разницы — оба определяют поведение Claude</label>
+      <label class="opt"><input type="radio" name="q9" value="b"> CLAUDE.md = «пожалуйста, делай X» (LLM может проигнорировать). Hook = гарантированное выполнение — код запускается всегда, независимо от LLM</label>
+      <label class="opt"><input type="radio" name="q9" value="c"> Hooks работают быстрее</label>
+      <label class="opt"><input type="radio" name="q9" value="d"> CLAUDE.md для проекта; Hooks для user-level</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 10 / 30</div><div class="q-pts">10 б.</div></div>
+    <div class="q-text">Дан следующий hook в <code>~/.claude/settings.json</code> на Linux. Что он делает?</div>
+    <div class="code">{
+  <span class="st">"hooks"</span>: {
+    <span class="st">"PostToolUse"</span>: [{
+      <span class="st">"matcher"</span>: <span class="st">"Edit|Write"</span>,
+      <span class="st">"hooks"</span>: [{
+        <span class="st">"type"</span>: <span class="st">"command"</span>,
+        <span class="st">"command"</span>: <span class="st">"jq -r '.tool_input.file_path' | xargs -I{} python3 -m py_compile {}"</span>
+      }]
+    }]
+  }
+}</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q10" value="a"> Запускает prettier для каждого отредактированного файла</label>
+      <label class="opt"><input type="radio" name="q10" value="b"> После каждого Edit/Write Python-файла запускает проверку компиляции; при синтаксической ошибке Claude получает её и может исправить</label>
+      <label class="opt"><input type="radio" name="q10" value="c"> Логирует файл в журнал</label>
+      <label class="opt"><input type="radio" name="q10" value="d"> Синтаксис неверный — hook не работает так</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 11 / 30</div><div class="q-pts">10 б.</div></div>
+    <div class="q-text">Hook возвращает разные exit codes. Как каждый из них влияет на Claude Code?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q11" value="a"> Exit 0 = успех, Exit 1 = ошибка, остальные = пропуск</label>
+      <label class="opt"><input type="radio" name="q11" value="b"> Exit 0 = успех (парсить JSON из stdout); Exit 2 = блокирующая ошибка (stderr отправляется Claude как ошибка); остальные = неблокирующее предупреждение</label>
+      <label class="opt"><input type="radio" name="q11" value="c"> Exit code неважен — учитывается только stdout</label>
+      <label class="opt"><input type="radio" name="q11" value="d"> Exit 0 = продолжить, Exit 1 = завершить сессию, Exit 2 = спросить пользователя</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 12 / 30</div><div class="q-pts">10 б.</div></div>
+    <div class="q-text">Напишите hook для Linux, блокирующий любую попытку Claude прочитать файлы <code>.env</code>. Какая конфигурация правильная?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q12" value="a">
+<pre style="font-size:.73rem;direction:ltr;text-align:left;color:#9ab0e8;margin-top:.3rem;">{"hooks":{"PreToolUse":[{
+  "matcher":"Read",
+  "hooks":[{"type":"command",
+    "command":"bash -c 'FILE=$(jq -r \".tool_input.file_path\"); if [[ \"$FILE\" == *.env* ]]; then echo \"Blocked\" &gt;&amp;2; exit 2; fi'"}]
+}]}}</pre>
+      </label>
+      <label class="opt"><input type="radio" name="q12" value="b">
+<pre style="font-size:.73rem;direction:ltr;text-align:left;color:#9ab0e8;margin-top:.3rem;">{"permissions":{"deny":["Read(.env)"]}}
+# Только в блоке permissions settings.json</pre>
+      </label>
+      <label class="opt"><input type="radio" name="q12" value="c"> Добавить <code>.env</code> в CLAUDE.md в раздел «Никогда не читать эти файлы»</label>
+      <label class="opt"><input type="radio" name="q12" value="d"> Оба A и B верны — A даёт детерминированную блокировку, B — дополнительный уровень защиты</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 13 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Что делает <code>"async": true</code> в настройке hook?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q13" value="a"> Запускает hook до инструмента, а не после</label>
+      <label class="opt"><input type="radio" name="q13" value="b"> Hook выполняется в фоне без блокировки — Claude Code продолжает работу, не дожидаясь завершения hook. Подходит для логирования, уведомлений, бэкапов</label>
+      <label class="opt"><input type="radio" name="q13" value="c"> Hook работает в отдельном async-потоке с доступом к GPU</label>
+      <label class="opt"><input type="radio" name="q13" value="d"> Позволяет hook обращаться к Claude API</label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION D: MCP ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-purple">Часть D</span>
+    <span class="sec-name">MCP Servers — интеграционная архитектура</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 14 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Какие транспортные протоколы поддерживает MCP в Claude Code? Напишите команду добавления MCP-сервера через HTTP.</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q14" value="a"> Только stdio — MCP работает только с локальными процессами</label>
+      <label class="opt"><input type="radio" name="q14" value="b"> stdio и HTTP/SSE. Добавление: <code>claude mcp add --transport http myserver https://api.example.com/mcp</code></label>
+      <label class="opt"><input type="radio" name="q14" value="c"> Только WebSocket</label>
+      <label class="opt"><input type="radio" name="q14" value="d"> Только HTTP и gRPC</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 15 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Дана следующая команда. Что она настраивает?</div>
+    <div class="code">claude mcp add --transport stdio postgres \
+  --env <span class="st">"DATABASE_URL=postgresql://user:pass@localhost/mydb"</span> \
+  -- npx -y @anthropic-ai/mcp-server-postgres</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q15" value="a"> Подключение к PostgreSQL через REST API</label>
+      <label class="opt"><input type="radio" name="q15" value="b"> Настраивает MCP-сервер PostgreSQL со stdio-транспортом — позволяет Claude выполнять SQL-запросы напрямую к БД</label>
+      <label class="opt"><input type="radio" name="q15" value="c"> Устанавливает PostgreSQL extension для Claude</label>
+      <label class="opt"><input type="radio" name="q15" value="d"> Создаёт connection pool к БД</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 16 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Каковы 3 основных примитива протокола MCP?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q16" value="a"> functions, events, streams</label>
+      <label class="opt"><input type="radio" name="q16" value="b"> tools, resources, prompts</label>
+      <label class="opt"><input type="radio" name="q16" value="c"> read, write, execute</label>
+      <label class="opt"><input type="radio" name="q16" value="d"> input, output, error</label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION E: SDK & CI ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-cyan">Часть E</span>
+    <span class="sec-name">Claude Code SDK и интеграция с GitHub/GitLab</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 17 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Какой SDK-флаг позволяет запускать Claude Code в headless/non-interactive режиме (для CI/CD)?</div>
+    <div class="code">$ claude <span class="hl">???</span> <span class="st">"run integration tests and fix failures"</span> \
+    --output-format stream-json</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q17" value="a"> <code>--headless</code></label>
+      <label class="opt"><input type="radio" name="q17" value="b"> <code>-p</code> (print mode — один промпт, non-interactive, подходит для CI)</label>
+      <label class="opt"><input type="radio" name="q17" value="c"> <code>--ci</code></label>
+      <label class="opt"><input type="radio" name="q17" value="d"> <code>--batch</code></label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 18 / 30</div><div class="q-pts">10 б.</div></div>
+    <div class="q-text">Дан GitHub Actions workflow. Что в нём отсутствует для корректной работы?</div>
+    <div class="code">on: [pull_request]
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: claude -p <span class="st">"Review this PR for security issues"</span></div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q18" value="a"> Нужно добавить <code>runs-on: self-hosted</code></label>
+      <label class="opt"><input type="radio" name="q18" value="b"> Отсутствуют: (1) установка claude-code (<code>curl install</code>), (2) <code>env: ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}</code></label>
+      <label class="opt"><input type="radio" name="q18" value="c"> Claude Code не поддерживает GitHub Actions</label>
+      <label class="opt"><input type="radio" name="q18" value="d"> Нужно добавить <code>--dangerously-skip-permissions</code></label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 19 / 30</div><div class="q-pts">6 б.</div></div>
+    <div class="q-text">В чём разница между <code>--output-format json</code> и <code>--output-format stream-json</code>?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q19" value="a"> stream-json быстрее</label>
+      <label class="opt"><input type="radio" name="q19" value="b"> json возвращает весь результат в конце; stream-json возвращает события в реальном времени как JSONL — подходит для CI с отображением прогресса</label>
+      <label class="opt"><input type="radio" name="q19" value="c"> json для текста, stream-json для кода</label>
+      <label class="opt"><input type="radio" name="q19" value="d"> На практике нет разницы</label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION F: SECURITY ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-red">Часть F</span>
+    <span class="sec-name">Permissions, Security и Settings</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 20 / 30</div><div class="q-pts">10 б.</div></div>
+    <div class="q-text">Дан <code>~/.claude/settings.json</code>. Какая конфигурация разрешает <code>npm run *</code> и <code>git *</code> автоматически, но блокирует <code>rm -rf</code> и <code>sudo</code>?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q20" value="a">
+<pre style="font-size:.73rem;direction:ltr;text-align:left;color:#9ab0e8;margin-top:.3rem;">{"permissions":{
+  "allow":["Bash(npm run:*)","Bash(git:*)"],
+  "deny":["Bash(rm -rf:*)","Bash(sudo:*)"]
+}}</pre>
+      </label>
+      <label class="opt"><input type="radio" name="q20" value="b">
+<pre style="font-size:.73rem;direction:ltr;text-align:left;color:#9ab0e8;margin-top:.3rem;">{"allowedCommands":["npm","git"],
+ "blockedCommands":["rm","sudo"]}</pre>
+      </label>
+      <label class="opt"><input type="radio" name="q20" value="c"> Можно задать только deny, но не allow</label>
+      <label class="opt"><input type="radio" name="q20" value="d"> Настройки permissions в settings.json не работают на Linux</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 21 / 30</div><div class="q-pts">6 б.</div></div>
+    <div class="q-text">Где находится settings.json файл Claude Code на Linux? (выберите все правильные)</div>
+    <div class="q-note">Может быть несколько правильных ответов</div>
+    <div class="opts">
+      <label class="opt multi"><input type="checkbox" name="q21" value="a"> <code>~/.claude/settings.json</code> — user-level</label>
+      <label class="opt multi"><input type="checkbox" name="q21" value="b"> <code>.claude/settings.json</code> — project-level</label>
+      <label class="opt multi"><input type="checkbox" name="q21" value="c"> <code>/etc/claude/settings.json</code> — system-wide</label>
+      <label class="opt multi"><input type="checkbox" name="q21" value="d"> <code>.claude/settings.local.json</code> — локальные переопределения (в .gitignore)</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 22 / 30</div><div class="q-pts">6 б.</div></div>
+    <div class="q-text">В чём главная проблема безопасности при использовании <code>--dangerously-skip-permissions</code>?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q22" value="a"> Снижение производительности</label>
+      <label class="opt"><input type="radio" name="q22" value="b"> Пропускает все permission-запросы — Claude может выполнять любые действия (удаление файлов, запуск команд) без подтверждения; опасно в production-окружении</label>
+      <label class="opt"><input type="radio" name="q22" value="c"> Более быстрое исчерпание rate limits</label>
+      <label class="opt"><input type="radio" name="q22" value="d"> Работает только на macOS</label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION G: AGENTS ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-gold">Часть G</span>
+    <span class="sec-name">Sub-Agents, Skills и продвинутые Workflows</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 23 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">В чём техническое отличие Skills от Sub-agents?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q23" value="a"> Skills — внешние плагины; Sub-agents — встроенные</label>
+      <label class="opt"><input type="radio" name="q23" value="b"> Skills работают в основном контексте и предоставляют инструкции/экспертизу; Sub-agents работают в изолированном контексте с отдельными system prompt, tools и памятью</label>
+      <label class="opt"><input type="radio" name="q23" value="c"> Нет разницы — они идентичны</label>
+      <label class="opt"><input type="radio" name="q23" value="d"> Sub-agents — это Skills, работающие в облаке</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 24 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Где размещается определение Sub-agent в Claude Code?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q24" value="a"> <code>~/.claude/agents/my-agent.md</code> — содержимое файла является system prompt агента</label>
+      <label class="opt"><input type="radio" name="q24" value="b"> <code>.claude/agents/my-agent.md</code> — содержимое является system prompt (важно: это system prompt, а не user prompt!)</label>
+      <label class="opt"><input type="radio" name="q24" value="c"> Настраивается в settings.json под ключом <code>"agents"</code></label>
+      <label class="opt"><input type="radio" name="q24" value="d"> Оба A и B верны — user-level и project-level агенты</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 25 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Что такое паттерн «Best of N» в workflows Claude Code?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q25" value="a"> Использование N лучших моделей одновременно</label>
+      <label class="opt"><input type="radio" name="q25" value="b"> Запуск Claude Code N раз для одной задачи (через параллельные ветки/worktrees) → выбор лучшего решения. Повышает качество ценой увеличения стоимости</label>
+      <label class="opt"><input type="radio" name="q25" value="c"> Выбор N наиболее релевантных файлов для контекста</label>
+      <label class="opt"><input type="radio" name="q25" value="d"> N = максимальное количество токенов для использования</label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION H: LINUX ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-blue">Часть H</span>
+    <span class="sec-name">Linux-специфика и практические сценарии</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 26 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">На Linux — какую команду уведомления использовать в hook (вместо osascript, который только для macOS)?</div>
+    <div class="code"><span class="cm"># Notification hook в ~/.claude/settings.json</span>
+{
+  <span class="st">"hooks"</span>: {
+    <span class="st">"Notification"</span>: [{
+      <span class="st">"matcher"</span>: <span class="st">""</span>,
+      <span class="st">"hooks"</span>: [{
+        <span class="st">"type"</span>: <span class="st">"command"</span>,
+        <span class="st">"command"</span>: <span class="st">"???"</span>
+      }]
+    }]
+  }
+}</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q26" value="a"> <code>say "Claude needs attention"</code></label>
+      <label class="opt"><input type="radio" name="q26" value="b"> <code>notify-send "Claude Code" "Needs your attention"</code></label>
+      <label class="opt"><input type="radio" name="q26" value="c"> <code>echo "notification" &gt; /dev/tty</code></label>
+      <label class="opt"><input type="radio" name="q26" value="d"> <code>wall "Claude Code needs input"</code></label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 27 / 30</div><div class="q-pts">8 б.</div></div>
+    <div class="q-text">Сценарий: запретить Claude Code изменять файлы вне директории <code>src/</code>. Как правильно добавить это в settings.json?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q27" value="a">
+<pre style="font-size:.73rem;direction:ltr;text-align:left;color:#9ab0e8;margin-top:.3rem;">{"permissions":{
+  "allow":["Edit(src/**)","Write(src/**)"],
+  "deny":["Edit","Write"]
+}}</pre>
+      </label>
+      <label class="opt"><input type="radio" name="q27" value="b">
+<pre style="font-size:.73rem;direction:ltr;text-align:left;color:#9ab0e8;margin-top:.3rem;">{"sandbox":{"enabled":true,"allowedPaths":["src/"]}}</pre>
+      </label>
+      <label class="opt"><input type="radio" name="q27" value="c"> Добавить в CLAUDE.md: «изменяй только файлы в src/»</label>
+      <label class="opt"><input type="radio" name="q27" value="d"> A верно — glob-паттерн в permissions.allow/deny ограничивает инструмент конкретными путями</label>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 28 / 30</div><div class="q-pts">6 б.</div></div>
+    <div class="q-text">Что делает <code>claude --enable-auto-mode</code> (или <code>Shift+Tab</code> для переключения)?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q28" value="a"> Включает GPU-ускорение</label>
+      <label class="opt"><input type="radio" name="q28" value="b"> Переключает между режимами: default → acceptEdits (автоматически принимает изменения файлов) → auto (автономная работа) → plan (только планирование)</label>
+      <label class="opt"><input type="radio" name="q28" value="c"> Включает multi-tab режим</label>
+      <label class="opt"><input type="radio" name="q28" value="d"> Автоматически активирует extended thinking</label>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION I: OPEN QUESTIONS ===== -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-tag t-orange">Часть I</span>
+    <span class="sec-name">Открытые вопросы — проектирование и реализация</span>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 29 / 30</div><div class="q-pts">25 б.</div></div>
+    <div class="q-text">Спроектируйте полную систему hooks для Linux-команды, работающей с monorepo Python+TypeScript. Требования:</div>
+    <div class="scenario">
+      <strong>Требования:</strong><br>
+      1. Auto-format: Python (black) и TypeScript (prettier) после каждого редактирования<br>
+      2. Security: блокировка доступа к .env, SSH-ключам и /etc/<br>
+      3. Tests: запуск pytest/jest после изменений в бизнес-логике<br>
+      4. Notification: <code>notify-send</code> когда Claude ожидает ввода<br>
+      5. Logging: лог всех bash-команд Claude в <code>~/.claude/audit.log</code>
+    </div>
+    <textarea name="q29" rows="12" placeholder="Напишите полный settings.json со всеми hooks. Укажите matchers, commands и флаги async там, где нужно..."></textarea>
+  </div>
+
+  <div class="card">
+    <div class="q-top"><div class="q-num">Вопрос 30 / 30</div><div class="q-pts">25 б.</div></div>
+    <div class="q-text">Спроектируйте полный workflow для строго регулируемой среды (финтех). Claude Code не может обращаться к production-окружению, читать секреты, и все изменения обязаны проходить автоматическое security-сканирование.</div>
+    <div class="scenario">
+      <strong>Constraints:</strong> Linux-серверы, GitLab CI, production PostgreSQL (доступ запрещён), секреты в HashiCorp Vault, code review обязателен для каждого MR
+    </div>
+    <textarea name="q30" rows="12" placeholder="Опишите: (1) структуру проекта + что включить в CLAUDE.md, (2) Hooks для enforcement, (3) Permissions в settings.json, (4) CI-pipeline с Claude Code, (5) MCP-серверы — что подключить, что нет. Приведите конкретные примеры кода..."></textarea>
+  </div>
+</div>
+
+</div><!-- end wrap -->
+
+<div class="submit-area">
+  <p style="color:var(--muted);margin-bottom:1.2rem;font-size:.88rem;">250 баллов · 28 закрытых вопросов (200 б.) + 2 открытых (50 б.) · Проходной балл: 75% · Результат будет отправлен на vika@timeclock365.com</p>
+  <button type="button" class="btn-submit" id="submitBtn" onclick="submitExam()">
+    <span id="submitLabel">📤 Отправить экзамен</span>
+  </button>
+</div>
+
+<div id="inline-results">
+  <div style="max-width:860px;margin:0 auto;padding:0 1.5rem;">
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <div style="font-size:3rem;font-weight:900;" id="sdisplay"></div>
+      <div id="slabel" style="color:var(--muted);font-size:.88rem;margin:.4rem 0 1rem;"></div>
+      <div id="verd" style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;"></div>
+    </div>
+    <div id="akey"></div>
+    <div class="open-note" style="margin-top:1.5rem;">
+      <h3>📋 Оценка открытых вопросов (25+25 баллов)</h3>
+      <p><strong>В29 — Система Hooks (25 б.):</strong> PostToolUse formatter с правильным matcher (5), PreToolUse security blocking с exit 2 (5), PostToolUse запуск тестов (5), Notification hook с notify-send (5), async-логирование (5)</p>
+      <p style="margin-top:.5rem;"><strong>В30 — Fintech Workflow (25 б.):</strong> CLAUDE.md без credentials (5), PreToolUse hooks для блокировки .env/production (5), полный permissions.deny (5), CI-pipeline с ANTHROPIC_API_KEY как secret (5), MCP только для dev-инструментов, не для prod (5)</p>
+    </div>
+  </div>
+</div>
+
+<!-- OVERLAY MODAL -->
+<div id="overlay">
+  <div class="modal">
+    <div class="modal-icon" id="modal-icon">📤</div>
+    <h2 id="modal-title">Отправка результатов...</h2>
+    <p id="modal-msg">Пожалуйста, подождите</p>
+    <div class="score" id="modal-score" style="display:none;"></div>
+    <div id="modal-btns" style="display:none;">
+      <button class="modal-btn" onclick="document.getElementById(&#39;overlay&#39;).classList.remove(&#39;show&#39;);document.getElementById(&#39;inline-results&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Посмотреть результаты</button>
+      <button class="modal-btn sec" onclick="document.getElementById(&#39;overlay&#39;).classList.remove(&#39;show&#39;)">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── TIMER ──────────────────────────────────────────────
+let timeLeft=3600, totalTime=3600, timerDone=false;
+function pad(n){return String(n).padStart(2,'0');}
+function tick(){
+  const m=Math.floor(timeLeft/60),s=timeLeft%60;
+  const d=document.getElementById('timer-display');
+  d.textContent=`${pad(m)}:${pad(s)}`;
+  d.className=timeLeft<=300?'crit':timeLeft<=600?'warn':'';
+  const pb=document.getElementById('progress-bar');
+  pb.style.width=(timeLeft/totalTime*100)+'%';
+  pb.style.background=timeLeft<=300?'var(--red)':timeLeft<=600?'var(--gold)':'var(--green)';
+  if(timeLeft>0){timeLeft--;setTimeout(tick,1000);}
+  else if(!timerDone){timerDone=true;submitExam(true);}
+}
+setTimeout(tick,1000);
+
+// ── ANSWER COUNT ───────────────────────────────────────
+function updateCount(){
+  const mc=document.querySelectorAll('input[type=radio]:checked').length;
+  const cbNames=new Set([...document.querySelectorAll('input[type=checkbox]:checked')].map(e=>e.name));
+  const ta=[...document.querySelectorAll('textarea')].filter(t=>t.value.trim().length>0).length;
+  document.getElementById('answered-count').textContent=`Отвечено: ${mc+cbNames.size+ta} / 30`;
+}
+document.addEventListener('change',updateCount);
+document.addEventListener('input',updateCount);
+
+// ── CORRECT ANSWERS ────────────────────────────────────
+const CORRECT={
+  q1:'b',q2:'b',q3:'c',q4:['a','b','d'],
+  q5:'b',q6:'b',q7:'b',q8:'b',
+  q9:'b',q10:'b',q11:'b',q12:'d',q13:'b',
+  q14:'b',q15:'b',q16:'b',
+  q17:'b',q18:'b',q19:'b',
+  q20:'a',q21:['a','b','d'],q22:'b',
+  q23:'b',q24:'d',q25:'b',
+  q26:'b',q27:'d',q28:'b'
+};
+const LABELS={
+  q1:'В1: Архитектура Coding Assistant',q2:'В2: Установка на Linux',q3:'В3: Tool Use система',q4:'В4: Источники контекста',
+  q5:'В5: /clear и /compact',q6:'В6: Custom-команды',q7:'В7: $ARGUMENTS',q8:'В8: Thinking mode',
+  q9:'В9: Hook vs CLAUDE.md',q10:'В10: PostToolUse hook',q11:'В11: Exit codes hooks',q12:'В12: Security hook',q13:'В13: async hook',
+  q14:'В14: MCP транспорты',q15:'В15: MCP postgres команда',q16:'В16: MCP примитивы',
+  q17:'В17: SDK флаг -p',q18:'В18: GitHub Actions',q19:'В19: stream-json',
+  q20:'В20: Конфиг permissions',q21:'В21: Расположение settings.json',q22:'В22: dangerously-skip',
+  q23:'В23: Skills vs Sub-agents',q24:'В24: Расположение agent-файлов',q25:'В25: Best of N',
+  q26:'В26: Linux-уведомление',q27:'В27: Ограничение путей',q28:'В28: Auto mode'
+};
+const PTS={q1:6,q2:6,q3:8,q4:6,q5:8,q6:8,q7:6,q8:8,q9:8,q10:10,q11:10,q12:10,q13:8,q14:8,q15:8,q16:8,q17:8,q18:10,q19:6,q20:10,q21:6,q22:6,q23:8,q24:8,q25:8,q26:8,q27:8,q28:6};
+
+// ── GRADE ──────────────────────────────────────────────
+function gradeExam(){
+  let score=0,total=200,details=[];
+  for(const[q,correct] of Object.entries(CORRECT)){
+    const pts=PTS[q];
+    let got=false;
+    if(Array.isArray(correct)){
+      const checked=[...document.querySelectorAll(`input[name="${q}"]:checked`)].map(e=>e.value).sort();
+      got=JSON.stringify(checked)===JSON.stringify([...correct].sort());
+    }else{
+      const sel=document.querySelector(`input[name="${q}"]:checked`);
+      got=sel&&sel.value===correct;
+    }
+    if(got)score+=pts;
+    details.push({label:LABELS[q],ok:got,pts});
+  }
+  return{score,total,details};
+}
+
+// ── BUILD EMAIL BODY ───────────────────────────────────
+function buildEmailBody(name,email,role,exp,score,total,details,q29,q30,elapsed){
+  const pct=Math.round(score/total*100);
+  const pass=pct>=75;
+  const mins=Math.floor((totalTime-timeLeft-elapsed)/60);
+  let rows='';
+  details.forEach(d=>{rows+=`${d.ok?'✅':'❌'} ${d.label} (${d.ok?d.pts:0}/${d.pts})\n`;});
+
+  return `
+РЕЗУЛЬТАТЫ ЭКЗАМЕНА CLAUDE CODE
+================================
+Дата: ${new Date().toLocaleString('ru-RU')}
+Время выполнения: ~${Math.max(1,Math.floor((totalTime-timeLeft)/60))} мин.
+
+КАНДИДАТ
+--------
+Имя: ${name}
+Email: ${email}
+Должность: ${role||'—'}
+Опыт: ${exp||'—'}
+
+РЕЗУЛЬТАТ
+---------
+Баллы (закрытые вопросы): ${score} / ${total}
+Процент: ${pct}%
+Статус: ${pass?'✅ ПРОШЁЛ':'❌ НЕ ПРОШЁЛ'}
+
+ДЕТАЛИ ПО ВОПРОСАМ
+------------------
+${rows}
+ОТКРЫТЫЙ ВОПРОС 29 (система hooks):
+-------------------------------------
+${q29||'(нет ответа)'}
+
+ОТКРЫТЫЙ ВОПРОС 30 (fintech workflow):
+---------------------------------------
+${q30||'(нет ответа)'}
+`;
+}
+
+// ── SUBMIT ─────────────────────────────────────────────
+function showOverlay(icon,title,msg,score,total,showBtns){
+  document.getElementById('modal-icon').textContent=icon;
+  document.getElementById('modal-title').textContent=title;
+  document.getElementById('modal-msg').textContent=msg;
+  const sc=document.getElementById('modal-score');
+  if(score!=null){
+    sc.style.display='block';
+    const pct=Math.round(score/total*100);
+    sc.textContent=`${score}/${total} (${pct}%)`;
+    sc.style.color=pct>=75?'var(--green)':'var(--red)';
+  }else sc.style.display='none';
+  document.getElementById('modal-btns').style.display=showBtns?'block':'none';
+  document.getElementById('overlay').classList.add('show');
+}
+
+async function submitExam(timedOut){
+  // Validate candidate info
+  const name=(document.getElementById('cand-name').value||'').trim();
+  const email=(document.getElementById('cand-email').value||'').trim();
+  if(!name||!email){
+    ['cand-name','cand-email'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(!el.value.trim())el.classList.add('required-empty');
+    });
+    showOverlay('⚠️','Заполните данные','Пожалуйста, укажите имя и email перед отправкой.',null,null,true);
+    return;
+  }
+
+  const role=document.getElementById('cand-role').value||'';
+  const exp=document.getElementById('cand-exp').value||'';
+  const q29=document.querySelector('textarea[name="q29"]').value||'';
+  const q30=document.querySelector('textarea[name="q30"]').value||'';
+
+  const{score,total,details}=gradeExam();
+  const pct=Math.round(score/total*100);
+  const pass=pct>=75;
+
+  // Disable submit
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  document.getElementById('submitLabel').innerHTML='<span class="sending-spinner"></span> Отправка...';
+
+  showOverlay('📤','Отправка результатов...','Пожалуйста, подождите',null,null,false);
+
+  // Build email
+  const body=buildEmailBody(name,email,role,exp,score,total,details,q29,q30);
+
+  // Try EmailJS
+  let sent=false;
+  try{
+    // EmailJS public key — uses free tier (200 emails/month)
+    // Service: Gmail, Template: simple text
+    emailjs.init({publicKey:'user_placeholder_init'});
+    await emailjs.send('service_placeholder','template_placeholder',{
+      to_email:'vika@timeclock365.com',
+      from_name:name,
+      from_email:email,
+      subject:`Claude Code Экзамен — ${name} — ${score}/${total} (${pct}%)`,
+      message:body,
+      candidate_name:name,
+      candidate_email:email,
+      score_text:`${score}/${total} (${pct}%) — ${pass?'ПРОШЁЛ':'НЕ ПРОШЁЛ'}`,
+    });
+    sent=true;
+  }catch(e){
+    // EmailJS not configured — fallback to mailto
+    console.warn('EmailJS not configured, using mailto fallback',e);
+  }
+
+  // Fallback: mailto link (always works, opens email client)
+  if(!sent){
+    const subject=encodeURIComponent(`Claude Code Экзамен — ${name} — ${score}/${total} (${pct}%)`);
+    const bodyEnc=encodeURIComponent(body);
+    const mailtoUrl=`mailto:vika@timeclock365.com?subject=${subject}&body=${bodyEnc}`;
+    const link=document.createElement('a');
+    link.href=mailtoUrl;
+    link.click();
+  }
+
+  // Show inline results
+  const{details:d2}=gradeExam();
+  let html='';
+  d2.forEach(d=>{html+=`<div class="ak-row ${d.ok?'ok':'no'}"><span>${d.ok?'✅':'❌'}</span><span>${d.label} (${d.ok?d.pts:0}/${d.pts} б.)</span></div>`;});
+  document.getElementById('sdisplay').textContent=`${score}/${total}`;
+  document.getElementById('sdisplay').style.color=pass?'var(--green)':'var(--red)';
+  document.getElementById('slabel').textContent=`Закрытые вопросы: ${pct}% | Открытые вопросы оцениваются отдельно (+до 50 б.)`;
+  document.getElementById('verd').textContent=pass?'🎉 Прошёл! (закрытые вопросы)':'⚠️ Не прошёл — необходимо повторить материал';
+  document.getElementById('verd').style.color=pass?'var(--green)':'var(--red)';
+  document.getElementById('akey').innerHTML=html;
+  document.getElementById('inline-results').style.display='block';
+
+  // Update overlay
+  showOverlay(
+    sent?'✅':'📧',
+    sent?'Результаты отправлены!':'Откройте почтовый клиент',
+    sent
+      ?`Результаты ${name} отправлены на vika@timeclock365.com`
+      :`Откройте почтовый клиент — письмо подготовлено для отправки на vika@timeclock365.com`,
+    score,total,true
+  );
+}
+
+// Clear red borders on input
+document.getElementById('cand-name').addEventListener('input',function(){this.classList.remove('required-empty');});
+document.getElementById('cand-email').addEventListener('input',function(){this.classList.remove('required-empty');});
+</script>
+
+
+</body></html>
